@@ -15,6 +15,9 @@ export default new class Bricksfield {
     this.currentBlock = null;
     this.rotation = null;
     this.gameOver = false;
+    this.lines = 0;
+    this.score = 0;
+    this.level = 1;
   }
   
   getCurrBlockPos() {
@@ -157,7 +160,9 @@ export default new class Bricksfield {
         return [toShiftY, toDeleteY];
       } else if (line.length > 0 && line.length < 10 && toDeleteY.length > 0) {
         toShiftY.push(line);
-      } else if (line.length === 10) {
+      } else if (line.length === 10 && toShiftY.length !== 0) {
+        toShiftY.push(line);
+      }  else if (line.length === 10 && toShiftY.length === 0) {
         toDeleteY.push(line);
       } 
     } 
@@ -180,7 +185,17 @@ export default new class Bricksfield {
           this.grid[x][y] = undefined;
         });
       });
-    }   
+
+      if (toDeleteY.length === 1) this.score += 100;
+      else if (toDeleteY.length === 2) this.score += 300;
+      else if (toDeleteY.length === 3) this.score += 700;
+      else if (toDeleteY.length === 4) this.score += 1500;
+
+      this.lines += toDeleteY.length;
+      this.level = Math.floor(this.lines/10)+ 1;
+
+      this.sliceHeap(...this.checkHeap());
+    }
   }
   
   init() {
