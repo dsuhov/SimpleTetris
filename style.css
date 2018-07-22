@@ -1,0 +1,50 @@
+@font-face { 
+  font-family: "VT323";
+  src: url('./fonts/VT323-Regular.ttf') format("truetype");
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body {
+  width: 100%;
+  position: relative;
+}
+
+.game {
+  width: 520px;
+  padding-top: 20px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  overflow: hidden;
+}
+
+#tetrisField {
+  float: left;
+}
+
+.info {
+  position: relative;
+  font-family: 'VT323', monospace;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  font-size: 25px;
+  float: right;
+}
+
+.info span {
+  display: block;
+}
+
+.info .next {
+  width: 200px;
+  margin-bottom: 20px;
+}
+
+#nextBlock {
+  padding-top: 10px;
+}
